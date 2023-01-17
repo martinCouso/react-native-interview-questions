@@ -273,4 +273,66 @@
 - Animations are a pain point for React Native but through the two available API built in we have a way to create simple animations for our applications.
 - The two systems are the <b>Animated API</b>, meant to be used for focused control over specific values and <b>LayoutAnimation API</b> for more general layout transactions. 
 
-###  [ ⬆ Back to Introductory Questions ](introductory-questions)
+###  [ ⬆ Back to Introductory Questions ](#introductory-questions)
+
+### Does React Native works with any syntax transformer by default? if it does which do you think is the reason?
+- React Native ships by default with Babel.
+- Since the JavaScript code in our RN applications will be executed in different environments, i.e. Hermes, JavaScriptCore, V8, etc, it makes sense to use a syntax transformer to be able to use 
+the newest syntax without having issues with any the of the interpreters.
+
+### Name the main characteristics of React Navigation and React Native Navigation
+<b>React Navigation:</b>
+
+- It is a JavaScript-based library for routing and navigation in React Native apps.
+- It offers a customizable stack navigator, tab navigator, and drawer navigator.
+- It is built and maintained by the React Native community.
+- Its current versions is 6.x
+
+<b>React Native Navigation:</b>
+
+- It is a native navigation library for React Native, meaning it uses native navigation components rather than JavaScript-based ones.
+- It provides performance improvements compared to JavaScript-based libraries.
+- It is built and maintained by Wix, a company that also maintains other React Native libraries such as react-native-ui-lib.
+- Its current version is 7.x
+
+### What are Error Boundaries? What kind of errors can not be caught with this type of component?
+- Error boundaries are React components that are able to catch errors in their child component tree, log those errors and display a fallback UI.
+- Errors in the following context can't be captured:
+  - Event handlers.
+  - Asynchronous code(e.g. setTimeout).
+  - In the Error Boundary itself.
+  - Native code.
+- An ErrorBoundary component needs to be created using a Class and it should implement 3 life cycle methods:
+  - static <b>getDerivedStateFromError</b> where the hasError state should be updated and <b>componentDidCatch</b> where any log service can be called and finally 
+the render method, where some conditional rendering logic needs to be in place in order to return the fallback UI instead of the broken tree.
+
+### What are common ways to optimize a Flat List?
+- Leverage the virtualization of the FlatList to only render the items that are currently on the screen, setting up the <b>getItemLayout</b> and <b>initialNumToRender</b> properties helps to
+achieve this. 
+- Use a stable and unique key on each item item.
+- Set the <b>maxToRenderPerBatch</b> prop to a reasonable number.
+- Make the logic and components as simple as possible inside the <b>renderItem</b> prop.
+- Use the InterationManager to wait until the first render in order to start rendering the FlatList component.
+
+### What type of tests can be performed on React Native?
+- There are several types of tests that can be performed on React Native applications, including:
+ - Unit tests, which test individual functions or components in isolation
+ - Snapshot tests, which compare the rendered output of a component to a saved version
+ - Integration tests, which test the interactions between multiple components or the integration of the app with external APIs
+ - End-to-end tests, which test the app as a whole by simulating user interactions.
+- Jest, Enzyme, Detox and React Native Testing Library are popular testing frameworks used in React Native development.
+
+### How many times is the useEffect Hook called by default?
+- This hook will be called by default every time the component is re-rendered.
+- If the dependency array is empty, it will run once after the component is mounted.
+- Conversely, if dependencies are provided, the hook will be called every time
+  a dependency value is changed.
+- Finally, if we had been talking about React instead of React Native, the hook renders twice even if the array of dependencies
+  is empty, that is, if Strict Mode is enabled. This happens so React can look for functions that are not being cleared correctly.
+
+### What is a HOC? In which scenarios are a good idea to implement one?
+- A Higher Order Component (HOC) is a design pattern in React that allows for code reuse by wrapping a component in another component. 
+- A HOC is a function that takes a component as an argument and returns a new component. It's a way to reuse component logic.
+- HOCs are useful in scenarios where you need to reuse component logic across multiple components.
+- Most of these scenarios are now covered by hooks but there's still a few cases where HOC's are the way to go, i.e. When we need to wrap a
+component with a Provider, like Redux, Mobx, etc and when we want to share templates.
